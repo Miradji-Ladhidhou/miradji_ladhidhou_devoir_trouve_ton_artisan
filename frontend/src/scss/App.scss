@@ -1,0 +1,51 @@
+@font-face{
+    font-family: Graphik;
+    src : 
+    url(../font/GraphikCompact-Medium-Trial.otf)
+};
+
+*{
+    font-family: Graphik;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+};
+
+// Navigation
+.recherche{
+    max-width: 700px;;
+};
+
+.texteNav{
+    text-decoration: underline;
+    color: #384050;
+};
+
+.nav-link{
+    padding-left: 100px;
+};
+
+.logo{
+    width: 150px;
+    height: 100px;
+};
+
+.btn_recherche{
+    padding-left: 20px;
+
+};
+
+
+// Footer
+.footer{
+    background-color: #00497C;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.logo-footer{
+    width: 300px;
+    height: 200px;
+    padding: 0
+};
