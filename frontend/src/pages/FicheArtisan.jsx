@@ -1,0 +1,55 @@
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import '../scss/FicheArtisan.scss';
+
+function FicheArtisan() {
+  const { id } = useParams();
+  const [artisan, setArtisan] = useState(null);
+
+  useEffect(() => {
+    const fetchArtisan = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/api/artisans/${id}`);
+        setArtisan(response.data);
+      } catch (err) {
+        console.error('Erreur lors de la récupération de l’artisan :', err);
+      }
+    };
+
+    fetchArtisan();
+  }, [id]);
+
+  const renderStars = (note) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} className={i <= note ? 'star filled' : 'star'}>★</span>
+      );
+    }
+    return stars;
+  };
+  
+  if (!artisan) return <p>Chargement...</p>;
+
+  return (
+    <div className="fiche-artisan">
+      <h2>{artisan.nom}</h2>
+      <img src={artisan.photo || '/default-avatar.jpg'} alt={artisan.nom} className="artisan-photo" />
+      <p className="stars">{renderStars(artisan.note || 0)}</p>
+      <p><strong>Spécialité :</strong> {artisan.specialite?.nom}</p>
+      <p><strong>Localisation :</strong> {artisan.ville}</p>
+      <p><strong>À propos :</strong> {artisan.a_propos || 'Non renseigné'}</p>
+
+      <form className="contact-form">
+        <h3>Contacter {artisan.nom}</h3>
+        <input type="text" placeholder="Votre nom" required />
+        <input type="email" placeholder="Votre email" required />
+        <textarea placeholder="Votre message..." required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  );
+}
+
+export default FicheArtisan;

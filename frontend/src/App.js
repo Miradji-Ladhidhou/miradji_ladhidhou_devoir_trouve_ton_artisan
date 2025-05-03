@@ -5,6 +5,7 @@ import Navbar from './components/footer-header/Navbar';
 import Footer from './components/footer-header/Footer';
 import Home from './pages/Home';
 import ListeArtisans from './pages/ListeArtisans';
+import FicheArtisan from './pages/FicheArtisan';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/liste-artisans" element={<ListeArtisans />} />
+      <Route path="/artisan/:id" element={<FicheArtisan />} />
     </Routes>
     <Footer />
   </Router>
