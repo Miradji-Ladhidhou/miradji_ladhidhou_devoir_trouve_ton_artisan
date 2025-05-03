@@ -6,6 +6,7 @@ import Footer from './components/footer-header/Footer';
 import Home from './pages/Home';
 import ListeArtisans from './pages/ListeArtisans';
 import FicheArtisan from './pages/FicheArtisan';
+import NotFound from './pages/NotFound';
 
 
 function App() {
@@ -18,7 +19,12 @@ function App() {
       <Route path="/artisan/:id" element={<FicheArtisan />} />
     </Routes>
     <Footer />
+    <Routes>
+      <Route path="*" element={<NotFound />} />
+      <Route path="/404" element={<NotFound />} />
+    </Routes>
   </Router>
+  
   );
 }
 
