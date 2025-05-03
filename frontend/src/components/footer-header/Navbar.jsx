@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -18,7 +19,7 @@ function CustomNavbar({ onHeightChange }) {
   return (
     <Navbar ref={navbarRef} expand="lg" className="bg-body-tertiary fixed-top">
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand as={Link} to="/">
           <img src={logo} alt="logo" className="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -37,7 +38,7 @@ function CustomNavbar({ onHeightChange }) {
             style={{ maxHeight: '250px', paddingLeft: '50px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">BATIMENT</Nav.Link>
+            <Nav.Link as={Link} to="../../pages/ListeArtisans">BATIMENT</Nav.Link>
             <Nav.Link href="#action2">SERVICES</Nav.Link>
             <Nav.Link href="#action3">FABRICATION</Nav.Link>
             <Nav.Link href="#action4">ALIMENTATION</Nav.Link>
