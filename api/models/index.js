@@ -1,24 +1,30 @@
-// models/index.js
+const fs = require('fs');
+const path = require('path');
 const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
 const sequelize = new Sequelize('artisans', 'root', 'root', {
   host: 'localhost',
-  port: 8889, // ← très important pour MAMP
+  port: 8889,
   dialect: 'mysql',
   logging: false,
 });
 
+const db = {};
 
-const db = {
-  sequelize,
-  Sequelize,
-  Category: require('./categorie')(sequelize, Sequelize.DataTypes),
-  Specialite: require('./specialite')(sequelize, Sequelize.DataTypes),
-  Artisan: require('./artisan')(sequelize, Sequelize.DataTypes),
-};
+fs.readdirSync(__dirname)
+  .filter(file => file !== basename && file.endsWith('.js'))
+  .forEach(file => {
+    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+    db[model.name] = model; // ← le nom du modèle est pris automatiquement
+  });
 
-// Associations
-db.Category.associate(db);
-db.Specialite.associate(db);
-db.Artisan.associate(db);
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db); // ← toutes les associations après création
+  }
+});
+
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
 module.exports = db;

@@ -11,8 +11,16 @@ const port = 3001;
 app.use(cors());
 app.use(bodyParser.json());
 
+const corsOptions = {
+  origin: 'http://localhost:3000', // Remplacez par l'URL de votre frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  Credentials: true,
+};
+
 // Utilise les routes pour /api/artisans
 app.use('/api/artisans', artisans);
+
+app.use(cors(corsOptions));
 
 // Teste la connexion à la base de données
 sequelize.authenticate()

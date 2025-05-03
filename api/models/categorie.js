@@ -1,6 +1,6 @@
-// models/category.js
+// models/categorie.js
 module.exports = (sequelize, DataTypes) => {
-  const Category = sequelize.define('Category', {
+  const Categorie = sequelize.define('Categorie', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -19,12 +19,12 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   // Association avec Specialite
-  Category.associate = (models) => {
-    Category.hasMany(models.Specialite, {
+  Categorie.associate = (models) => {
+    Categorie.hasMany(models.Specialite, {
       foreignKey: 'categorie_id',
       as: 'specialites',
     });
   };
 
-  return Category;
+  return Categorie;
 };

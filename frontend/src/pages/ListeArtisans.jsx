@@ -1,45 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { FaStar } from 'react-icons/fa';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import '../scss/ListeArisans.scss';
+import { Link } from 'react-router-dom';
 
 function ListeArtisans() {
-  const { categorie } = useParams();
   const [artisans, setArtisans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
-    // Appel à l'API pour récupérer les artisans selon la catégorie
-    // Exemple : `/api/artisans?categorie=batiment`
-    // Ici on simule
-    setArtisans([]); // Remplacé plus tard par la vraie API
-  }, [categorie]);
+    const queryParams = new URLSearchParams(location.search);
+    const nom = queryParams.get('nom');
+    const categorie = queryParams.get('categorie');
+
+    const fetchArtisans = async () => {
+      try {
+        let url = 'http://localhost:3001/api/artisans';
+
+        if (nom) {
+          url += `/search?nom=${encodeURIComponent(nom)}`;
+        } else if (categorie) {
+          url += `/categorie/${encodeURIComponent(categorie)}`;
+        }
+
+        const response = await axios.get(url);
+        setArtisans(response.data);
+      } catch (err) {
+        console.error('Erreur lors de la récupération des artisans:', err);
+        setArtisans([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArtisans();
+  }, [location.search]);
+
+  const renderStars = (note) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} className={i <= note ? 'star filled' : 'star'}>★</span>
+      );
+    }
+    return stars;
+  };
+
+  if (loading) return <p className="loading">Chargement...</p>;
 
   return (
-    <Container className="my-5">
-      <h1 className="mb-4 text-capitalize">Artisans - {categorie}</h1>
-      <Row className="g-4">
-        {artisans.map((artisan) => (
-          <Col key={artisan.id} xs={12} md={6} lg={4}>
-            <Card
-              className="shadow-sm h-100"
-              onClick={() => window.location.href = `/artisans/${artisan.id}`}
-              style={{ cursor: 'pointer' }}
-            >
-              <Card.Body>
-                <Card.Title>{artisan.nom}</Card.Title>
-                <Card.Text>
-                  {Array(artisan.note).fill().map((_, i) => (
-                    <FaStar key={i} color="#ffc107" />
-                  ))}
-                </Card.Text>
-                <Card.Text><strong>Spécialité :</strong> {artisan.specialite}</Card.Text>
-                <Card.Text><strong>Localisation :</strong> {artisan.localisation}</Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <div className="artisans-container">
+      <h2 className="title">Liste des Artisans</h2>
+      {artisans.length === 0 ? (
+        <p className="no-result">Aucun artisan trouvé</p>
+      ) : (
+        <div className="card-grid">
+  {artisans.map((artisan) => (
+    <Link to={`/artisan/${artisan.id}`} key={artisan.id} className="artisan-card">
+      <h3>{artisan.nom}</h3>
+      <p><strong>Spécialité :</strong> {artisan.specialite?.nom || 'Non renseignée'}</p>
+      <p><strong>Localisation :</strong> {artisan.ville || 'Non précisée'}</p>
+      <p className="stars">{renderStars(artisan.note || 0)}</p>
+    </Link>
+  ))}
+</div>
+
+      )}
+    </div>
   );
 }
 

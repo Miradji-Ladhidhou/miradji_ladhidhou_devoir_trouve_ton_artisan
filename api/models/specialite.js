@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         model: 'categories', // Correspond à ta table 'categories'
         key: 'id',
       },
+      allowNull: false,
     },
   },
 
@@ -25,9 +26,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   );
 
-  // Association avec Category et Artisan
+  // Association avec Categorie et Artisan
   Specialite.associate = (models) => {
-    Specialite.belongsTo(models.Category, {
+    Specialite.belongsTo(models.Categorie, {
       foreignKey: 'categorie_id',
       as: 'categorie',
     });

@@ -2,7 +2,7 @@
     font-family: Graphik;
     src : 
     url(../font/GraphikCompact-Medium-Trial.otf)
-};
+}
 
 *{
     font-family: Graphik;
@@ -47,8 +47,9 @@ h1,h2{
 // Footer
 .footer{
     background-color: #00497C;
-    bottom: 0;
+    margin-bottom: 0%;
     width: 100%;
+    z-index: 1;
 }
 
 .logo-footer{
