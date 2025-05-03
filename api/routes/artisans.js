@@ -20,7 +20,7 @@ router.get('/search', async (req, res) => {
     // Construire la condition de recherche
     let searchConditions = {
       where: {},
-      attributes: ['id', 'nom', 'note'],
+      attributes: ['id', 'nom', 'note', 'ville', 'a_propos', 'site_web'],
       include: [
         {
           model: Specialite,
@@ -66,7 +66,7 @@ router.get('/categorie/:categorie', async (req, res) => {
     const categorie = req.params.categorie.toLowerCase();
 
     const artisans = await Artisan.findAll({
-      attributes: ['id', 'nom', 'note'],
+      attributes: ['id', 'nom', 'note', 'ville', 'a_propos', 'site_web'],
       include: [
         {
           model: Specialite,
@@ -112,7 +112,7 @@ router.get('/', async (req, res) => {
     console.log('Début de la récupération des artisans...');
     
     const artisans = await Artisan.findAll({
-      attributes: ['id', 'nom', 'note'],
+      attributes: ['id', 'nom', 'note', 'ville' , 'a_propos', 'site_web'],
       include: {
         model: Specialite,
         as: 'specialite', 
@@ -139,7 +139,7 @@ router.get('/:id', async (req, res) => {
     console.log(`Recherche de l'artisan avec l'ID : ${req.params.id}`);
 
     const artisan = await Artisan.findByPk(req.params.id, {
-      attributes: ['id', 'nom', 'note'],
+      attributes: ['id', 'nom', 'note' , 'ville', 'a_propos', 'site_web'],
       include: {
         model: Specialite,
         as: 'specialite', 

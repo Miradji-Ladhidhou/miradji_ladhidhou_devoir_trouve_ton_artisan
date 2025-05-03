@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../scss/FicheArtisan.scss';
 
@@ -40,11 +40,13 @@ function FicheArtisan() {
       <p><strong>Spécialité :</strong> {artisan.specialite?.nom}</p>
       <p><strong>Localisation :</strong> {artisan.ville}</p>
       <p><strong>À propos :</strong> {artisan.a_propos || 'Non renseigné'}</p>
+      <p><strong>Site web :</strong> <Link>{artisan.site_web || 'Non renseigné'}</Link></p>
 
       <form className="contact-form">
         <h3>Contacter {artisan.nom}</h3>
         <input type="text" placeholder="Votre nom" required />
         <input type="email" placeholder="Votre email" required />
+        <input type="text" placeholder="Objet" required />
         <textarea placeholder="Votre message..." required></textarea>
         <button type="submit">Envoyer</button>
       </form>
