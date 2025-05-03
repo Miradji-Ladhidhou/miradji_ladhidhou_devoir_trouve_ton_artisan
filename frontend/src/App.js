@@ -17,14 +17,10 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/liste-artisans" element={<ListeArtisans />} />
       <Route path="/artisan/:id" element={<FicheArtisan />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
     <Footer />
-    <Routes>
-      <Route path="*" element={<NotFound />} />
-      <Route path="/404" element={<NotFound />} />
-    </Routes>
   </Router>
-  
   );
 }
 
