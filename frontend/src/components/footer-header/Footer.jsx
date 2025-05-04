@@ -12,9 +12,10 @@ function Footer() {
           <Col md={4} className="mb-3">
             <Nav className="flex-column">
               <h5>Pages légales</h5>
-              <Nav.Link href="#" className="text-light p-0">Données personnelles</Nav.Link>
-              <Nav.Link href="#" className="text-light p-0">Accessibilité</Nav.Link>
-              <Nav.Link href="#" className="text-light p-0">Cookies</Nav.Link>
+              <Nav.Link href="/DonneesPersonnelles" className="text-light p-0">Données personnelles</Nav.Link>
+              <Nav.Link href="/Accessibilite" className="text-light p-0">Accessibilité</Nav.Link>
+              <Nav.Link href="/Cookies" className="text-light p-0">Cookies</Nav.Link>
+              <Nav.Link href="/MentionLegales" className="text-light p-0">Mension légales</Nav.Link>
             </Nav>
           </Col>
           <Col md={4} className="mb-3">
@@ -27,8 +28,6 @@ function Footer() {
             tel: <a href='+33 (0)4 26 73 40 00'>+33 (0)4 26 73 40 00</a>
           </Col>
         </Row>
-        <hr className="border-light" />
-        <p className="text-center mb-0">&copy; {new Date().getFullYear()} Trouve mon artisan. Tous droits réservés.</p>
       </Container>
     </footer>
   );

@@ -47,9 +47,11 @@ h1,h2{
 // Footer
 .footer{
     background-color: #00497C;
-    margin-bottom: 0%;
+    position: relative;
+    margin-bottom: 0px;
     width: 100%;
-    z-index: 1;
+    padding-bottom: 0px;
+    
 }
 
 .logo-footer{
