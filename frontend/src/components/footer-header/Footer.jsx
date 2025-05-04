@@ -25,7 +25,7 @@ function Footer() {
             <p>69269 LYON CEDEX 02</p>
             <p>France</p>
             </address>
-            tel: <a href='+33 (0)4 26 73 40 00'>+33 (0)4 26 73 40 00</a>
+            tel: <a href='tel:+33 (0)4 26 73 40 00'>+33 (0)4 26 73 40 00</a>
           </Col>
         </Row>
       </Container>

@@ -68,7 +68,7 @@ function Home() {
           ))}
         </Row>
 
-        <h2 className="text-center mb-4">Nos 3 artisans du mois ⭐</h2>
+        <h2 className="text-center mb-4">Nos 3 artisans du mois</h2>
         <Row className="g-4">
           {topArtisans.map((artisan) => (
             <Col key={artisan.id} xs={12} md={4}>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../scss/FicheArtisan.scss';
+import logo from '../image/Logo.png';
 
 function FicheArtisan() {
   const { id } = useParams();
@@ -35,7 +36,7 @@ function FicheArtisan() {
   return (
     <div className="fiche-artisan">
       <h2>{artisan.nom}</h2>
-      <img src={artisan.photo || '/default-avatar.jpg'} alt={artisan.nom} className="artisan-photo" />
+      <img src={logo} alt={artisan.nom} className="artisan-photo" />
       <p className="stars">{renderStars(artisan.note || 0)}</p>
       <p><strong>Spécialité :</strong> {artisan.specialite?.nom}</p>
       <p><strong>Localisation :</strong> {artisan.ville}</p>
