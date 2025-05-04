@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import '../scss/ListeArtisans.scss';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 function ListeArtisans() {
   const [artisans, setArtisans] = useState([]);
@@ -78,6 +79,13 @@ function ListeArtisans() {
 
   return (
     <div className="artisans-container">
+
+      <Helmet>
+        <title>Liste des artisans</title>
+        <meta name="description" content="Explorez notre sélection d'artisans professionnels dans diverses catégories. 
+        Que vous ayez besoin d'un plombier, électricien ou menuisier, trouvez l'expert qu'il vous faut près de chez vous." />
+      </Helmet>
+
       <h2 className="title">{getTitreCategorie()}</h2>
       
       {/* Si aucun artisan n'est trouvé, affiche un message */}

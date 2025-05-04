@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import CustomNavbar from '../components/footer-header/Navbar';
 import '../scss/home.scss';
@@ -56,6 +57,12 @@ function Home() {
   return (
     <>
       <CustomNavbar onHeightChange={setNavHeight} />
+
+      <Helmet>
+        <title>Accueil</title>
+        <meta name="description" content="Découvrez les meilleurs artisans près de chez vous et suivez les étapes simples pour les contacter." />
+      </Helmet>
+
 
       <Container style={{ paddingTop: `${navHeight + 20}px` }} className="my-5">
         <h1 className="text-center mb-4">Comment trouver mon artisan ?</h1>
