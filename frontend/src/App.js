@@ -12,23 +12,26 @@ import Cookies from './pages/Cookies';
 import DonneesPersonnelles from './pages/DonneesPersonnelles';
 import NotFound from './pages/NotFound';
 
-
 function App() {
   return (
     <Router>
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/liste-artisans" element={<ListeArtisans />} />
-      <Route path="/artisan/:id" element={<FicheArtisan />} />
-      <Route path="/MentionLegales" element={<MentionLegales />} />
-      <Route path="/Accessibilite" element={<Accessibilite />} />
-      <Route path="/Cookies" element={<Cookies />} />
-      <Route path="/DonneesPersonnelles" element={<DonneesPersonnelles />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-    <Footer />
-  </Router>
+      <div className="app-container">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/liste-artisans" element={<ListeArtisans />} />
+            <Route path="/artisan/:id" element={<FicheArtisan />} />
+            <Route path="/MentionLegales" element={<MentionLegales />} />
+            <Route path="/Accessibilite" element={<Accessibilite />} />
+            <Route path="/Cookies" element={<Cookies />} />
+            <Route path="/DonneesPersonnelles" element={<DonneesPersonnelles />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
