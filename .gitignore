@@ -1,2 +1,3 @@
 donnees.sql
 schemaArtisan.sql
+echo ".env"
