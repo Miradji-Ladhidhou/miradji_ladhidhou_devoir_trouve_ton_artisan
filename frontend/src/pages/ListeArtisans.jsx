@@ -9,15 +9,40 @@ function ListeArtisans() {
   const [loading, setLoading] = useState(true);
   const location = useLocation();
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const nom = queryParams.get('nom');
-    const categorie = queryParams.get('categorie');
+  // Extraction des paramètres de recherche
+  const queryParams = new URLSearchParams(location.search);
+  const nom = queryParams.get('nom');
+  const categorie = queryParams.get('categorie');
 
+  // Fonction pour obtenir un titre dynamique basé sur la catégorie ou le nom
+  const getTitreCategorie = () => {
+    if (categorie) {
+      switch (categorie) {
+        case 'batiment':
+          return 'Bâtiment';
+        case 'services':
+          return 'Services';
+        case 'fabrication':
+          return 'Fabrication';
+        case 'alimentation':
+          return 'Alimentation';
+        default:
+          return 'Liste des Artisans';
+      }
+    } else if (nom) {
+      return `Résultats pour "${nom}"`;
+    } else {
+      return 'Tous les Artisans';
+    }
+  };
+
+  // Effect pour récupérer les artisans en fonction des paramètres 'nom' ou 'categorie'
+  useEffect(() => {
     const fetchArtisans = async () => {
       try {
         let url = 'http://localhost:3001/api/artisans';
 
+        // Modifie l'URL en fonction des paramètres de recherche
         if (nom) {
           url += `/search?nom=${encodeURIComponent(nom)}`;
         } else if (categorie) {
@@ -25,18 +50,19 @@ function ListeArtisans() {
         }
 
         const response = await axios.get(url);
-        setArtisans(response.data);
+        setArtisans(response.data);  // Met à jour l'état avec les artisans récupérés
       } catch (err) {
         console.error('Erreur lors de la récupération des artisans:', err);
-        setArtisans([]);
+        setArtisans([]);  // Si erreur, vide le tableau des artisans
       } finally {
-        setLoading(false);
+        setLoading(false);  // Indique que le chargement est terminé
       }
     };
 
     fetchArtisans();
-  }, [location.search]);
+  }, [nom, categorie]);  // Dépendances : mise à jour lorsque 'nom' ou 'categorie' change
 
+  // Fonction pour afficher les étoiles selon la note de l'artisan
   const renderStars = (note) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -47,25 +73,28 @@ function ListeArtisans() {
     return stars;
   };
 
+  // Affichage si les données sont en train de se charger
   if (loading) return <p className="loading">Chargement...</p>;
 
   return (
     <div className="artisans-container">
-      <h2 className="title">Liste des Artisans</h2>
+      <h2 className="title">{getTitreCategorie()}</h2>
+      
+      {/* Si aucun artisan n'est trouvé, affiche un message */}
       {artisans.length === 0 ? (
         <p className="no-result">Aucun artisan trouvé</p>
       ) : (
         <div className="card-grid">
-  {artisans.map((artisan) => (
-    <Link to={`/artisan/${artisan.id}`} key={artisan.id} className="artisan-card">
-      <h3>{artisan.nom}</h3>
-      <p><strong>Spécialité :</strong> {artisan.specialite?.nom || 'Non renseignée'}</p>
-      <p><strong>Localisation :</strong> {artisan.ville || 'Non précisée'}</p>
-      <p className="stars">{renderStars(artisan.note || 0)}</p>
-    </Link>
-  ))}
-</div>
-
+          {/* Affichage de chaque artisan */}
+          {artisans.map((artisan) => (
+            <Link to={`/artisan/${artisan.id}`} key={artisan.id} className="artisan-card">
+              <h3>{artisan.nom}</h3>
+              <p><strong>Spécialité :</strong> {artisan.specialite?.nom || 'Non renseignée'}</p>
+              <p><strong>Localisation :</strong> {artisan.ville || 'Non précisée'}</p>
+              <p className="stars">{renderStars(artisan.note || 0)}</p>
+            </Link>
+          ))}
+        </div>
       )}
     </div>
   );

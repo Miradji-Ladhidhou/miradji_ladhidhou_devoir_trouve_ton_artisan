@@ -1,13 +1,16 @@
+// Importation des dépendances nécessaires
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../scss/FicheArtisan.scss';
 import logo from '../image/Logo.png';
 
+// Composant pour afficher la fiche d'un artisan
 function FicheArtisan() {
-  const { id } = useParams();
-  const [artisan, setArtisan] = useState(null);
+  const { id } = useParams(); // Récupération de l'ID dans l'URL
+  const [artisan, setArtisan] = useState(null); // État pour stocker les données de l'artisan
 
+  // Chargement des données de l'artisan au montage du composant
   useEffect(() => {
     const fetchArtisan = async () => {
       try {
@@ -21,6 +24,7 @@ function FicheArtisan() {
     fetchArtisan();
   }, [id]);
 
+  // Fonction pour afficher les étoiles de notation
   const renderStars = (note) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -31,8 +35,10 @@ function FicheArtisan() {
     return stars;
   };
   
+  // Affiche un message de chargement pendant la requête
   if (!artisan) return <p>Chargement...</p>;
 
+  // Affichage des informations de l'artisan et formulaire de contact
   return (
     <div className="fiche-artisan">
       <h2>{artisan.nom}</h2>

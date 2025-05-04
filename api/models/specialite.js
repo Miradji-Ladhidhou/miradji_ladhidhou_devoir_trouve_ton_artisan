@@ -1,4 +1,4 @@
-// models/specialite.js
+// Définition du modèle 'Specialite' avec ses attributs et options
 module.exports = (sequelize, DataTypes) => {
   const Specialite = sequelize.define('Specialite', {
     id: {
@@ -14,19 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'categories', // Correspond à ta table 'categories'
+        model: 'categories', 
         key: 'id',
       },
-      allowNull: false,
     },
   },
-
   {
     timestamps: false 
-  }
-  );
+  });
 
-  // Association avec Categorie et Artisan
+  // Définition des relations entre 'Specialite' et les autres modèles
   Specialite.associate = (models) => {
     Specialite.belongsTo(models.Categorie, {
       foreignKey: 'categorie_id',

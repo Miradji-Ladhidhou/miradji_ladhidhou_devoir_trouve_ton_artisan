@@ -1,3 +1,4 @@
+// Importation des modules nécessaires pour le serveur Express
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -7,22 +8,21 @@ const artisans = require('./routes/artisans');
 const app = express();
 const port = 3001; 
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-
+// Définition des options CORS autorisant le frontend à communiquer avec le backend
 const corsOptions = {
-  origin: 'http://localhost:3000', // Remplacez par l'URL de votre frontend
+  origin: 'http://localhost:3000', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  Credentials: true,
+  credentials: true,
 };
 
-// Utilise les routes pour /api/artisans
+// Application des middlewares globaux avec configuration CORS
+app.use(cors(corsOptions));
+app.use(bodyParser.json());
+
+// Définition des routes pour les artisans via le préfixe /api/artisans
 app.use('/api/artisans', artisans);
 
-app.use(cors(corsOptions));
-
-// Teste la connexion à la base de données
+// Test de la connexion à la base de données avec Sequelize
 sequelize.authenticate()
   .then(() => {
     console.log('Connexion à la base de données réussie!');
@@ -31,7 +31,7 @@ sequelize.authenticate()
     console.error('Impossible de se connecter à la base de données:', err);
   });
 
-// Démarrer le serveur
+// Lancement du serveur Express
 app.listen(port, () => {
   console.log(`Serveur API démarré sur http://localhost:${port}`);
 });

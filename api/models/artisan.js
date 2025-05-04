@@ -1,3 +1,4 @@
+// Artisan model definition
 module.exports = (sequelize, DataTypes) => {
   const Artisan = sequelize.define('Artisan', {
     id: {

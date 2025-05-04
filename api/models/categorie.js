@@ -1,4 +1,4 @@
-// models/categorie.js
+// Fichier de définition du modèle Categorie
 module.exports = (sequelize, DataTypes) => {
   const Categorie = sequelize.define('Categorie', {
     id: {

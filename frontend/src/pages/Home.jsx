@@ -1,4 +1,4 @@
-// src/pages/Home.jsx
+// Importation des modules nécessaires
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -6,11 +6,13 @@ import axios from 'axios';
 import CustomNavbar from '../components/footer-header/Navbar';
 import '../scss/home.scss';
 
+// Composant principal de la page d'accueil
 function Home() {
-  const [navHeight, setNavHeight] = useState(0);
-  const [topArtisans, setTopArtisans] = useState([]);
-  const navigate = useNavigate();
+  const [navHeight, setNavHeight] = useState(0); // Gère la hauteur du menu pour le padding top
+  const [topArtisans, setTopArtisans] = useState([]); // Stocke les 3 meilleurs artisans
+  const navigate = useNavigate(); // Permet la navigation vers la fiche artisan
 
+  // Étapes d'utilisation affichées sur la page
   const etapes = [
     { numero: 1, texte: "Choisir la catégorie d’artisanat dans le menu." },
     { numero: 2, texte: "Choisir un artisan." },
@@ -18,6 +20,7 @@ function Home() {
     { numero: 4, texte: "Une réponse sera apportée sous 48h." },
   ];
 
+  // Récupère les artisans depuis l'API et sélectionne les 3 mieux notés
   useEffect(() => {
     const fetchArtisans = async () => {
       try {
@@ -33,6 +36,7 @@ function Home() {
     fetchArtisans();
   }, []);
 
+  // Affiche des étoiles en fonction de la note
   const renderStars = (note) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -43,10 +47,12 @@ function Home() {
     return stars;
   };
 
+  // Redirige vers la fiche d'un artisan
   const handleCardClick = (id) => {
     navigate(`/artisan/${id}`);
   };
 
+  // Rendu du composant Home
   return (
     <>
       <CustomNavbar onHeightChange={setNavHeight} />

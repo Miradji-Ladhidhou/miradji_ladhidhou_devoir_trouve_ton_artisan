@@ -1,23 +1,22 @@
+// Initialisation d'Express, importation des modèles et des dépendances
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
 const { Artisan, Specialite, Categorie} = db;
 const Sequelize = require('sequelize');
 
-// Rechercher un artisan par son nom et par catégorie
+// Route GET /search : recherche d’artisans par nom et/ou par catégorie
 router.get('/search', async (req, res) => {
   try {
-    const searchQuery = req.query.nom; // Récupérer le nom depuis la requête
-    const categorieQuery = req.query.categorie; // Récupérer la catégorie depuis la requête
+    const searchQuery = req.query.nom;
+    const categorieQuery = req.query.categorie;
 
-    // Vérifier que le nom est présent pour lancer la recherche
     if (!searchQuery && !categorieQuery) {
       return res.status(400).json({ message: 'Le nom ou la catégorie est requis pour la recherche' });
     }
 
     console.log(`Recherche d'artisan avec le nom : ${searchQuery} et la catégorie : ${categorieQuery}`);
 
-    // Construire la condition de recherche
     let searchConditions = {
       where: {},
       attributes: ['id', 'nom', 'note', 'ville', 'a_propos', 'site_web'],
@@ -60,7 +59,7 @@ router.get('/search', async (req, res) => {
   }
 });
 
-
+// Route GET /categorie/:categorie : recherche d’artisans par nom de catégorie
 router.get('/categorie/:categorie', async (req, res) => {
   try {
     const categorie = req.params.categorie.toLowerCase();
@@ -71,12 +70,12 @@ router.get('/categorie/:categorie', async (req, res) => {
         {
           model: Specialite,
           as: 'specialite',
-          required: true, // <- FORCER INNER JOIN ici
+          required: true,
           include: [
             {
               model: Categorie,
               as: 'categorie',
-              required: true, // <- ET ici aussi
+              required: true,
               where: Sequelize.where(
                 Sequelize.fn('LOWER', Sequelize.col('specialite.categorie.nom')),
                 {
@@ -90,7 +89,6 @@ router.get('/categorie/:categorie', async (req, res) => {
         },
       ],
     });
-    
 
     if (artisans.length === 0) {
       return res.status(404).json({ message: `Aucun artisan trouvé dans la catégorie ${categorie}` });
@@ -103,10 +101,7 @@ router.get('/categorie/:categorie', async (req, res) => {
   }
 });
 
-
-
-
-// Récupérer tous les artisans avec leurs spécialités
+// Route GET / : récupération de tous les artisans avec leurs spécialités et catégories
 router.get('/', async (req, res) => {
   try {
     console.log('Début de la récupération des artisans...');
@@ -133,7 +128,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Récupérer un artisan spécifique par ID avec sa spécialité
+// Route GET /:id : récupération d’un artisan spécifique par son ID
 router.get('/:id', async (req, res) => {
   try {
     console.log(`Recherche de l'artisan avec l'ID : ${req.params.id}`);

@@ -1,6 +1,9 @@
+// Importation des modules nécessaires : Sequelize pour la gestion de la base de données
+// et dotenv pour charger les variables d'environnement depuis un fichier .env
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
+// Configuration de la connexion à la base de données en utilisant les variables d'environnement.
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -9,10 +12,11 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    logging: false,
+    logging: false, 
   }
 );
 
+// Vérification de la connexion à la base de données.
 sequelize.authenticate()
   .then(() => {
     console.log("Connexion à la base de données réussie !");
