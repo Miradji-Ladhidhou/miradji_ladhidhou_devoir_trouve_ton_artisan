@@ -1,15 +1,9 @@
 .artisans-container {
-    padding: 120px 20px 60px; /* pour compenser navbar + footer */
+    padding: 120px 20px 60px;
     max-width: 1200px;
     margin: 0 auto;
   }
   
-  .title {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    color: #00497C;
-  }
   
   .loading, .no-result {
     text-align: center;
@@ -24,14 +18,18 @@
   }
   
   .artisan-card {
-    background-color: #f7f9fc;
-    border: 1px solid #dde1e7;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #384050;
+    background-color: #f1f8fc;
+    border: 1px solid #384050;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 10px #0074C7;
     transition: transform 0.2s ease;
     width: 270px;
     height: 220px;
+    box-shadow: none;
   }
   
   .artisan-card:hover {

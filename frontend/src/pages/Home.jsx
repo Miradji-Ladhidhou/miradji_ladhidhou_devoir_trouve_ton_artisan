@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import CustomNavbar from '../components/footer-header/Navbar';
-import '../scss/home.scss';
+
 
 // Composant principal de la page d'accueil
 function Home() {
@@ -86,16 +86,10 @@ function Home() {
           {topArtisans.map((artisan) => (
             <Col key={artisan.id} xs={12} md={4}>
               <Card
-                className="artisan-card h-100"
+                className="artisan-card"
                 style={{ cursor: 'pointer' }}
                 onClick={() => handleCardClick(artisan.id)}
               >
-                <Card.Img
-                  variant="top"
-                  src={artisan.photo || '/default-avatar.jpg'}
-                  alt=""
-                  className="artisan-photo"
-                />
                 <Card.Body>
                   <h3>{artisan.nom}</h3>
                   <p><strong>Spécialité :</strong> {artisan.specialite?.nom || 'Non renseignée'}</p>

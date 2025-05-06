@@ -8,26 +8,21 @@
       margin-bottom: 20px;
     }
   
-    h1 {
+    h1 P{
       font-size: 2rem;
-      color: #333;
+      color: #384050;
       margin-bottom: 10px;
-    }
-  
-    p {
-      color: #666;
-      margin-bottom: 20px;
     }
   
     .btn-home {
       padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
+      background-color: #0074C7;
+      color: #fff;
       text-decoration: none;
       border-radius: 5px;
   
       &:hover {
-        background-color: #0056b3;
+        background-color: #384050;
       }
     }
   }

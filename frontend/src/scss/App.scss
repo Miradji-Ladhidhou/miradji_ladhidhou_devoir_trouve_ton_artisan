@@ -1,7 +1,7 @@
 @font-face{
     font-family: Graphik;
     src : 
-    url(../font/GraphikCompact-Medium-Trial.otf)
+    url(../font/Graphik-Regular-Trial.otf)
 }
 
 *{
@@ -9,6 +9,7 @@
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
+    line-height: 1.625;
 };
 
 .main-content{
@@ -32,15 +33,10 @@ h1,h2{
 
 .texteNav{
     text-decoration: underline;
-    color: #384050;
 };
 
 .nav-link{
     padding-left: 100px;
-};
-
-.active-link{
-    color: #00497C;
 };
 
 .logo{
