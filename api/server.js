@@ -3,12 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const bodyParser = require('body-parser');
 const sequelize = require('./config/database'); 
 const artisans = require('./routes/artisans'); 
 
+
 const app = express();
-const port = 3001; 
+const port = process.env.PORT || 3001;
 
 // Configuration de la sécurité avec Helmet
 app.use(helmet());
@@ -26,9 +26,15 @@ const corsOptions = {
   credentials: true,
 };
 
+// Application du middleware de limitation des requêtes
+app.use(limiter);
+
 // Application des middlewares globaux avec configuration CORS
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
+
+// Middleware pour parser le JSON dans les requêtes
+app.use(express.json()); 
+
 
 // Définition des routes pour les artisans via le préfixe /api/artisans
 app.use('/api/artisans', artisans);
