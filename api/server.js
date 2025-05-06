@@ -1,12 +1,23 @@
 // Importation des modules nécessaires pour le serveur Express
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/database'); 
 const artisans = require('./routes/artisans'); 
 
 const app = express();
 const port = 3001; 
+
+// Configuration de la sécurité avec Helmet
+app.use(helmet());
+
+// Limitation du nombre de requêtes pour éviter les abus
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limite chaque IP à 100 requêtes par fenêtre
+});
 
 // Définition des options CORS autorisant le frontend à communiquer avec le backend
 const corsOptions = {
