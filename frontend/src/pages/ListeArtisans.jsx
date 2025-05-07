@@ -71,7 +71,12 @@ function ListeArtisans() {
         <span key={i} className={i <= note ? 'star filled' : 'star'}>★</span>
       );
     }
-    return stars;
+    return (
+      <>
+        {stars}
+        <span className="sr-only"> {note}/5</span>
+      </>
+    );
   };
 
   // Affichage si les données sont en train de se charger

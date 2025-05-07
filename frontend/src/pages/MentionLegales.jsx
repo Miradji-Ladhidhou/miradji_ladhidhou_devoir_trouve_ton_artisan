@@ -1,5 +1,4 @@
 import React from 'react';
-import '../scss/EnConstruction.scss';
 
 function MentionLegales() {
   return (

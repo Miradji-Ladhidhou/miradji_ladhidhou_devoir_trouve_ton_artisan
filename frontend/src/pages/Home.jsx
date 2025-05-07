@@ -1,19 +1,15 @@
-// Importation des modules nécessaires
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import axios from 'axios';
 import CustomNavbar from '../components/footer-header/Navbar';
+import '../scss/ListeArtisans.scss';
 
-
-// Composant principal de la page d'accueil
 function Home() {
-  const [navHeight, setNavHeight] = useState(0); // Gère la hauteur du menu pour le padding top
-  const [topArtisans, setTopArtisans] = useState([]); // Stocke les 3 meilleurs artisans
-  const navigate = useNavigate(); // Permet la navigation vers la fiche artisan
+  const [navHeight, setNavHeight] = useState(0);
+  const [topArtisans, setTopArtisans] = useState([]);
+  const navigate = useNavigate();
 
-  // Étapes d'utilisation affichées sur la page
   const etapes = [
     { numero: 1, texte: "Choisir la catégorie d’artisanat dans le menu." },
     { numero: 2, texte: "Choisir un artisan." },
@@ -21,7 +17,6 @@ function Home() {
     { numero: 4, texte: "Une réponse sera apportée sous 48h." },
   ];
 
-  // Récupère les artisans depuis l'API et sélectionne les 3 mieux notés
   useEffect(() => {
     const fetchArtisans = async () => {
       try {
@@ -37,7 +32,6 @@ function Home() {
     fetchArtisans();
   }, []);
 
-  // Affiche des étoiles en fonction de la note
   const renderStars = (note) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -45,15 +39,18 @@ function Home() {
         <span key={i} className={i <= note ? 'star filled' : 'star'}>★</span>
       );
     }
-    return stars;
+    return (
+      <>
+        {stars}
+        <span className="sr-only"> {note}/5</span>
+      </>
+    );
   };
 
-  // Redirige vers la fiche d'un artisan
   const handleCardClick = (id) => {
     navigate(`/artisan/${id}`);
   };
 
-  // Rendu du composant Home
   return (
     <>
       <CustomNavbar onHeightChange={setNavHeight} />
@@ -63,44 +60,32 @@ function Home() {
         <meta name="description" content="Découvrez les meilleurs artisans près de chez vous et suivez les étapes simples pour les contacter." />
       </Helmet>
 
+      <div className="artisans-container" style={{ paddingTop: `${navHeight + 20}px` }}>
+        <h1 className="title">Comment trouver mon artisan ?</h1>
+        <h2 className="subtitle">Suivez les étapes ci-dessous.</h2>
 
-      <Container style={{ paddingTop: `${navHeight + 20}px` }} className="my-5">
-        <h1 className="text-center mb-4">Comment trouver mon artisan ?</h1>
-        <h2 className="text-center mb-5">Suivez les étapes ci-dessous.</h2>
-
-        <Row className="g-4 mb-5">
+        <div className="card-grid">
           {etapes.map((item, index) => (
-            <Col key={index} xs={12} sm={6} md={3}>
-              <Card className="text-center shadow-sm h-100" style={{ cursor: 'default' }}>
-                <Card.Body>
-                  <h2>{item.numero}</h2>
-                  <p>{item.texte}</p>
-                </Card.Body>
-              </Card>
-            </Col>
+            <div key={index} className="etape-card" >
+              <h3>{item.numero}</h3>
+              <p>{item.texte}</p>
+            </div>
           ))}
-        </Row>
+        </div>
 
-        <h2 className="text-center mb-4">Nos 3 artisans du mois</h2>
-        <Row className="g-4">
+        <h2 className="title">Nos 3 artisans du mois</h2>
+
+        <div className="card-grid">
           {topArtisans.map((artisan) => (
-            <Col key={artisan.id} xs={12} md={4}>
-              <Card
-                className="artisan-card"
-                style={{ cursor: 'pointer' }}
-                onClick={() => handleCardClick(artisan.id)}
-              >
-                <Card.Body>
-                  <h3>{artisan.nom}</h3>
-                  <p><strong>Spécialité :</strong> {artisan.specialite?.nom || 'Non renseignée'}</p>
-                  <p><strong>Localisation :</strong> {artisan.ville || 'Non précisée'}</p>
-                  <p className="stars">{renderStars(artisan.note || 0)}</p>
-                </Card.Body>
-              </Card>
-            </Col>
+            <div key={artisan.id} className="artisan-card" style={{ cursor: 'pointer' }} onClick={() => handleCardClick(artisan.id)}>
+              <h3>{artisan.nom}</h3>
+              <p><strong>Spécialité :</strong> {artisan.specialite?.nom || 'Non renseignée'}</p>
+              <p><strong>Localisation :</strong> {artisan.ville || 'Non précisée'}</p>
+              <p className="stars">{renderStars(artisan.note || 0)}</p>
+            </div>
           ))}
-        </Row>
-      </Container>
+        </div>
+      </div>
     </>
   );
 }

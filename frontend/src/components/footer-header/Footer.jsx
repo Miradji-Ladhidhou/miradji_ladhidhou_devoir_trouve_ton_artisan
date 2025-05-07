@@ -26,12 +26,12 @@ function Footer() {
 
           <Col md={4} className="mb-3">
             <address>
-              <p>101 cours Charlemagne</p>
-              <p>CS 20033</p>
-              <p>69269 LYON CEDEX 02</p>
-              <p>France</p>
+              <p id='texte-footer'>101 cours Charlemagne</p>
+              <p id='texte-footer'>CS 20033</p>
+              <p id='texte-footer'>69269 LYON CEDEX 02</p>
+              <p id='texte-footer'>France</p>
             </address>
-            tel: <a href='tel:+33 (0)4 26 73 40 00'>+33 (0)4 26 73 40 00</a>
+            tel: <a href='tel:+33 (0)4 26 73 40 00' id='texte-footer'>+33 (0)4 26 73 40 00</a>
           </Col>
 
         </Row>
