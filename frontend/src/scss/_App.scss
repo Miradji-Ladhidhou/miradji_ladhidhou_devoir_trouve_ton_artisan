@@ -1,3 +1,5 @@
+@import './variables';
+
 @font-face{
     font-family: Graphik;
     src : 
@@ -20,24 +22,24 @@
 
 h1,h2,h3,h4,h5,h6{
     text-align: center;
-    color: #384050;
+    color: $primary-color;
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
 p{
-    color: #384050;
+    color: $primary-color;
 }
 
 button {
     padding: 10px 20px;
-    background-color: #0074C7;
-    color: #fff;
+    background-color: $quinary-color;
+    color: $senary-color;
     text-decoration: none;
     border-radius: 5px;
 
     &:hover {
-      background-color: #384050;
+      background-color: $primary-color;
     }
   }
 
@@ -64,7 +66,7 @@ button {
 }
 
 .footer{
-    background-color: #00497C;
+    background-color: $secondary-color;
     position: relative;
     margin-bottom: 0px;
     width: 100%;
@@ -79,7 +81,7 @@ button {
 }
 
 #texte-footer{
-    color: #fff;
+    color: $senary-color;
 }
 
 .en-construction-container {

@@ -1,3 +1,5 @@
+@import './variables';
+
 .artisans-container {
     padding: 120px 20px 60px;
     max-width: 1200px;
@@ -17,19 +19,7 @@
   }
   
   .artisan-card, .etape-card{
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    color: #384050;
-    background-color: #f1f8fc;
-    border: 1px solid #384050;
-    border-radius: 12px;
-    padding: 20px;
-    transition: transform 0.2s ease;
-    width: 270px;
-    height: 270px;
-    box-shadow: none;
-    text-decoration: none;
+    @include card;
   }
   
   .artisan-card:hover {

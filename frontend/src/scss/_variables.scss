@@ -1,0 +1,62 @@
+$primary-color: #384050;
+$secondary-color: #00497C;
+$tertiary-color: #82b864;
+$quaternary-color: #f1f8fc;
+$quinary-color: #0074c7;
+$senary-color: #ffff;
+
+@mixin card{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: $primary-color;
+    background-color: $quaternary-color;
+    border: 1px solid $primary-color;
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s ease;
+    width: 270px;
+    height: 270px;
+    box-shadow: none;
+    text-decoration: none;
+  }
+
+  @mixin photo-artisan{
+    display: block;
+    max-width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    border: 3px solid $primary-color;
+    background-color: $quinary-color;
+  }
+
+  @mixin info-artisan{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+
+}
+
+@mixin fiche-artisan{max-width: 600px;
+    margin: 200px auto 50px;
+    padding: 2rem;
+    background-color: $senary-color;
+    box-shadow: 0 4px 12px $secondary-color;
+    border-radius: 16px;}
+
+@mixin contact-form{margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+@mixin input-textarea{padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid $primary-color;
+    font-size: 1rem;
+    resize: vertical;
+}
