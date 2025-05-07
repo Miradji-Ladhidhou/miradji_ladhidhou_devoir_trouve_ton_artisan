@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../scss/FicheArtisan.scss';
 import logo from '../image/Logo.png';
 import { Helmet } from 'react-helmet-async';
 

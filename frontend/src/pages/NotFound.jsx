@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../scss/NotFound.scss';
 import logo from '../image/Logo.png';
 
 function NotFound() {
