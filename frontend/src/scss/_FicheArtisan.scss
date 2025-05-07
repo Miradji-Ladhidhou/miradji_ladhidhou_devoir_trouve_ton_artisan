@@ -1,0 +1,38 @@
+@import './variables';
+
+.fiche-artisan {
+    @include fiche-artisan;
+   
+  
+    .artisan-info {
+      @include info-artisan;
+  
+  }
+    .artisan-photo {
+      @include photo-artisan;
+    }
+  
+   
+    .contact-form {
+      @include contact-form;
+  
+  
+      input,
+      textarea {
+        @include input-textarea;
+      }
+  
+      textarea {
+        min-height: 120px;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      padding: 1rem;
+      .artisan-photo {
+        max-width: 150px;
+        height: 150px;
+      }
+    }
+  }
+  
