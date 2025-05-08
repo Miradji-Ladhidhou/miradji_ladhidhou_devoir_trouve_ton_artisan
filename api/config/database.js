@@ -1,5 +1,3 @@
-// Importation des modules nécessaires : Sequelize pour la gestion de la base de données
-// et dotenv pour charger les variables d'environnement depuis un fichier .env
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
@@ -9,10 +7,16 @@ const sequelize = new Sequelize(
   process.env.DB_USER,
   process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: process.env.DB_DIALECT,
-    logging: false, 
+    host: process.env.DB_HOST,  // Nom d'hôte de la base Clever Cloud (ex: ton_hote.clever-cloud.com)
+    port: process.env.DB_PORT || 3306,
+    dialect: process.env.DB_DIALECT || 'mysql',
+    logging: false,  // Désactive les logs de requêtes SQL
+    dialectOptions: {
+      ssl: {
+        require: true, // Oblige l'usage de SSL
+        rejectUnauthorized: false, // Autorise les certificats auto-signés (très utilisé dans les environnements de Cloud)
+      }
+    }
   }
 );
 
