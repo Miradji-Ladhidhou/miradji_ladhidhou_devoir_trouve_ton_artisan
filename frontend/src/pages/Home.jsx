@@ -19,7 +19,7 @@ function Home() {
   useEffect(() => {
     const fetchArtisans = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/api/artisans');
+        const response = await axios.get('https://api-mon-artisan.onrender.com/api/artisans');
         const sorted = response.data
           .sort((a, b) => (b.note || 0) - (a.note || 0))
           .slice(0, 3);

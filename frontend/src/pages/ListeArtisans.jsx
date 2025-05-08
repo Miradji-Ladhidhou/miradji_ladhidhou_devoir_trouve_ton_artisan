@@ -40,7 +40,7 @@ function ListeArtisans() {
   useEffect(() => {
     const fetchArtisans = async () => {
       try {
-        let url = 'http://localhost:3001/api/artisans';
+        let url = 'https://api-mon-artisan.onrender.com/api/artisans';
 
         // Modifie l'URL en fonction des paramètres de recherche
         if (nom) {

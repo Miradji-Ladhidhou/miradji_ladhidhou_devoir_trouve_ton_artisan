@@ -11,7 +11,18 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Configuration de la sécurité avec Helmet
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:', 'https://api-mon-artisan.onrender.com'],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      connectSrc: ["'self'", 'https://api-mon-artisan.onrender.com'],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+    },
+  })
+);
 
 // Limitation du nombre de requêtes pour éviter les abus
 const limiter = rateLimit({
@@ -21,7 +32,7 @@ const limiter = rateLimit({
 
 // Définition des options CORS autorisant le frontend à communiquer avec le backend
 const corsOptions = {
-  origin: 'http://localhost:3000', 
+  origin: 'https://api-mon-artisan.onrender.com', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
