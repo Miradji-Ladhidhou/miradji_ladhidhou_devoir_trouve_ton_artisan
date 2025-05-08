@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const specialite = sequelize.define('specialite', {
+  const Specialite = sequelize.define('Specialite', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -22,17 +22,17 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'specialites',
   });
 
-  specialite.associate = (models) => {
-    specialite.belongsTo(models.Categorie, {
+  Specialite.associate = (models) => {
+    Specialite.belongsTo(models.Categorie, {
       foreignKey: 'categorie_id',
       as: 'categorie',
     });
 
-    specialite.hasMany(models.Artisan, {
+    Specialite.hasMany(models.Artisan, {
       foreignKey: 'specialite_id',
       as: 'artisans',
     });
   };
 
-  return specialite;
+  return Specialite;
 };
