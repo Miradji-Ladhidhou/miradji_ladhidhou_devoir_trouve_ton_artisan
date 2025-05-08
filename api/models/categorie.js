@@ -1,4 +1,3 @@
-// Fichier de définition du modèle Categorie
 module.exports = (sequelize, DataTypes) => {
   const Categorie = sequelize.define('Categorie', {
     id: {
@@ -9,16 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     nom: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      unique: true,
     },
-  },
+  }, {
+    tableName: 'categories',
+    timestamps: false,
+  });
 
-    {
-      timestamps: false 
-    }
-  );
-
-  // Association avec Specialite
   Categorie.associate = (models) => {
     Categorie.hasMany(models.Specialite, {
       foreignKey: 'categorie_id',
