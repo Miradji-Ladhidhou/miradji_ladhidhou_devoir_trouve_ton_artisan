@@ -50,12 +50,12 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Association avec Specialite
-  Artisan.associate = (models) => {
-    Artisan.belongsTo(models.Specialite, {
+  artisan.associate = (models) => {
+    artisan.belongsTo(models.Specialite, {
       foreignKey: 'specialite_id',
       as: 'specialite',
     });
   };
 
-  return Artisan;
+  return artisan;
 };
