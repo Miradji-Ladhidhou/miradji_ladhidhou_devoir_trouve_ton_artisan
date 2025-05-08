@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         model: 'specialites',
         key: 'id',
       },
-      allowNull: false,
+   
     },
     note: {
       type: DataTypes.DECIMAL(2, 1),
