@@ -1,6 +1,6 @@
 // Artisan model definition
 module.exports = (sequelize, DataTypes) => {
-  const Artisan = sequelize.define('Artisan', {
+  const artisan = sequelize.define('Artisan', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -45,7 +45,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
   }, {
-    timestamps: false 
+    timestamps: false,
+    tableName: 'artisans',
   });
 
   // Association avec Specialite

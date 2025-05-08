@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   }, {
-    tableName: 'categories',
     timestamps: false,
+    tableName: 'categories',
   });
 
   Categorie.associate = (models) => {
