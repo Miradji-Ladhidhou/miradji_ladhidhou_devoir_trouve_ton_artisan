@@ -14,7 +14,7 @@ function FicheArtisan() {
   useEffect(() => {
     const fetchArtisan = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/artisans/${id}`);
+        const response = await axios.get(`https://miradji-ladhidhou-devoir-trouve-ton.onrender.com/api/artisans/${id}`);
         setArtisan(response.data);
       } catch (err) {
         console.error('Erreur lors de la récupération de l’artisan :', err);
