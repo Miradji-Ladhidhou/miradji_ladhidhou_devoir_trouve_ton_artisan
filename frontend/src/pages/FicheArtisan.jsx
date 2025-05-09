@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import logo from '../image/Logo.png';
 import { Helmet } from 'react-helmet-async';
 
 function FicheArtisan() {
@@ -9,18 +8,34 @@ function FicheArtisan() {
   const [artisan, setArtisan] = useState(null);
 
   useEffect(() => {
-    axios.get(`https://miradji-ladhidhou-devoir-trouve-ton.onrender.com/api/artisans/${id}`)
-      .then(res => setArtisan(res.data))
-      .catch(err => console.error('Erreur récupération artisan :', err));
+
+    const fetchArtisan = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/artisans/${id}`);
+        setArtisan(response.data);
+      } catch (err) {
+        console.error('Erreur lors de la récupération de l’artisan :', err);
+      }
+    };
+
+    fetchArtisan();
   }, [id]);
 
-  const renderStars = (note) => (
-    [...Array(5)].map((_, i) => (
-      <span key={i} className={i < note ? 'star filled' : 'star'}>★</span>
-    ))
-  );
+  // Fonction pour afficher les étoiles de notation
+  const renderStars = (note) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} className={i <= note ? 'star filled' : 'star'}>★</span>
+      );
+    }
+    return stars;
+  };
+  
+  // Affiche un message de chargement pendant la requête
+  console.log('artisan', artisan);
+  if (!artisan) return <p style={{ color: 'red', fontSize: '24px' }}>Chargement...</p>;
 
-  if (!artisan) return <p>Chargement...</p>;
 
   return (
     <div className="fiche-artisan">
@@ -30,7 +45,7 @@ function FicheArtisan() {
       </Helmet>
 
       <h2>{artisan.nom}</h2>
-      <img src={logo} alt={artisan.nom} className="artisan-photo" />
+      <img src="/Logo.png" alt={artisan.nom} className="artisan-photo" />
       <p className="stars">{renderStars(artisan.note || 0)}</p>
       <p><strong>Spécialité :</strong> {artisan.specialite?.nom}</p>
       <p><strong>Localisation :</strong> {artisan.ville}</p>

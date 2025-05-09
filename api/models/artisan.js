@@ -45,8 +45,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
   }, {
-    timestamps: false,
     tableName: 'artisans',
+    timestamps: false 
+
   });
 
   // Association avec Specialite

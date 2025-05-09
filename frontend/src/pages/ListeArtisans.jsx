@@ -30,7 +30,10 @@ function ListeArtisans() {
   useEffect(() => {
     const fetchArtisans = async () => {
       try {
-        let url = 'https://miradji-ladhidhou-devoir-trouve-ton.onrender.com/api/artisans';
+
+        let url = (`${process.env.REACT_APP_API_URL}/api/artisans`);
+
+        // Modifie l'URL en fonction des paramètres de recherche
         if (nom) {
           url += `/search?nom=${encodeURIComponent(nom)}`;
         } else if (categorie) {
@@ -54,7 +57,10 @@ function ListeArtisans() {
     ))
   );
 
-  if (loading) return <p className="loading">Chargement...</p>;
+
+  // Affichage si les données sont en train de se charger
+  if (loading) return <p style={{ color: 'red', fontSize: '24px' }}>Chargement...</p>;
+
 
   return (
     <div className="artisans-container">

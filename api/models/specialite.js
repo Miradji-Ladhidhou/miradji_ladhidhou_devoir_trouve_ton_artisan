@@ -17,9 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
     },
-  }, {
-    timestamps: false,
+  },
+  {
     tableName: 'specialites',
+    timestamps: false 
   });
 
   Specialite.associate = (models) => {

@@ -17,12 +17,20 @@ function Home() {
   ];
 
   useEffect(() => {
-    axios.get('https://miradji-ladhidhou-devoir-trouve-ton.onrender.com/api/artisans')
-      .then(res => {
-        const top = res.data.sort((a, b) => (b.note || 0) - (a.note || 0)).slice(0, 3);
-        setTopArtisans(top);
-      })
-      .catch(err => console.error('Erreur chargement artisans :', err));
+
+    const fetchArtisans = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/artisans`);
+        const sorted = response.data
+          .sort((a, b) => (b.note || 0) - (a.note || 0))
+          .slice(0, 3);
+        setTopArtisans(sorted);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des artisans:', error);
+      }
+    };
+    fetchArtisans();
+
   }, []);
 
   const renderStars = (note) => (

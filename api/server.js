@@ -1,6 +1,7 @@
 // Importation des modules nécessaires pour le serveur Express
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const sequelize = require('./config/database'); 
@@ -10,8 +11,22 @@ const artisans = require('./routes/artisans');
 const app = express();
 const port = process.env.PORT || 3001;
 
+// Middleware pour servir les fichiers statiques (images, CSS, JS)
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Configuration de la sécurité avec Helmet
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:', 'https://api-mon-artisan.onrender.com'],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      connectSrc: ["'self'", 'https://api-mon-artisan.onrender.com'],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      fontSrc: ["'self'", 'https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+    },
+  })
+);
 
 // Limitation du nombre de requêtes pour éviter les abus
 const limiter = rateLimit({
@@ -21,7 +36,7 @@ const limiter = rateLimit({
 
 // Définition des options CORS autorisant le frontend à communiquer avec le backend
 const corsOptions = {
-  origin: 'http://localhost:3000', 
+  origin: 'https://trouve-ton-artisan-75bn.onrender.com', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 };
@@ -50,5 +65,5 @@ sequelize.authenticate()
 
 // Lancement du serveur Express
 app.listen(port, () => {
-  console.log(`Serveur API démarré sur http://localhost:${port}`);
+  console.log(`Serveur API démarré sur ${port}`);
 });
