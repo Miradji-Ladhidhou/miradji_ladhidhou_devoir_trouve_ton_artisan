@@ -1,0 +1,104 @@
+@import './variables';
+
+@font-face{
+    font-family: Graphik;
+    src : 
+    url(../font/Graphik-Regular-Trial.otf)
+}
+
+*{
+    font-family: Graphik;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: 1.625;
+}
+
+.main-content{
+    padding: 20px;
+    margin-bottom: 150px;
+}
+
+
+h1,h2,h3,h4,h5,h6{
+    text-align: center;
+    color: $primary-color;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+p{
+    color: $primary-color;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: $quinary-color;
+    color: $senary-color;
+    text-decoration: none;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+
+.recherche{
+    max-width: 700px;;
+}
+
+.texteNav{
+    text-decoration: underline;
+}
+
+.nav-link{
+    padding-left: 100px;
+}
+
+.logo{
+    width: 150px;
+    height: 100px;
+}
+
+.btn_recherche{
+    padding-left: 20px;
+
+}
+
+.footer{
+    background-color: $secondary-color;
+    position: relative;
+    margin-bottom: 0px;
+    width: 100%;
+    padding-bottom: 0px;
+    
+}
+
+.logo-footer{
+    width: 300px;
+    height: 200px;
+    padding: 0
+}
+
+#texte-footer{
+    color: $senary-color;
+}
+
+.en-construction-container {
+    text-align: center;
+    padding: 100px 20px;
+  }
+
+  .stars {
+    margin-top: auto;
+    font-size: 1.2rem;
+    color: gold;
+  }
+
+  .star {
+    color: #ccc;
+  }
+
+  .star.filled {
+    color: #f0c420;
+  }
