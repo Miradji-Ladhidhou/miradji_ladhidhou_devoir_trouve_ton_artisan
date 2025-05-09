@@ -1,5 +1,3 @@
-// Importation des modules nécessaires : Sequelize pour la gestion de la base de données
-// et dotenv pour charger les variables d'environnement depuis un fichier .env
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
@@ -9,6 +7,7 @@ const sequelize = new Sequelize(
   process.env.DB_USER,      
   process.env.DB_PASSWORD,   
   {
+
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT || 'mysql',
     port: process.env.DB_PORT || 3306,

@@ -1,4 +1,3 @@
-// Fichier de définition du modèle Categorie
 module.exports = (sequelize, DataTypes) => {
   const Categorie = sequelize.define('Categorie', {
     id: {
@@ -9,9 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     nom: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      unique: true,
     },
-  },
+  }, {
+    timestamps: false,
+    tableName: 'categories',
+  });
+
 
     {
       tableName: 'categories',

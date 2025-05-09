@@ -17,6 +17,7 @@ function Home() {
   ];
 
   useEffect(() => {
+
     const fetchArtisans = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/artisans`);
@@ -29,34 +30,21 @@ function Home() {
       }
     };
     fetchArtisans();
+
   }, []);
 
-  const renderStars = (note) => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <span key={i} className={i <= note ? 'star filled' : 'star'}>★</span>
-      );
-    }
-    return (
-      <>
-        {stars}
-        <span className="sr-only"> {note}/5</span>
-      </>
-    );
-  };
-
-  const handleCardClick = (id) => {
-    navigate(`/artisan/${id}`);
-  };
+  const renderStars = (note) => (
+    [...Array(5)].map((_, i) => (
+      <span key={i} className={i < note ? 'star filled' : 'star'}>★</span>
+    ))
+  );
 
   return (
     <>
       <CustomNavbar onHeightChange={setNavHeight} />
-
       <Helmet>
         <title>Accueil</title>
-        <meta name="description" content="Découvrez les meilleurs artisans près de chez vous et suivez les étapes simples pour les contacter." />
+        <meta name="description" content="Trouvez un artisan près de chez vous." />
       </Helmet>
 
       <div className="artisans-container" style={{ paddingTop: `${navHeight + 20}px` }}>
@@ -64,8 +52,8 @@ function Home() {
         <h2 className="subtitle">Suivez les étapes ci-dessous.</h2>
 
         <div className="card-grid">
-          {etapes.map((item, index) => (
-            <div key={index} className="etape-card" >
+          {etapes.map((item, i) => (
+            <div key={i} className="etape-card">
               <h3>{item.numero}</h3>
               <p>{item.texte}</p>
             </div>
@@ -76,7 +64,7 @@ function Home() {
 
         <div className="card-grid">
           {topArtisans.map((artisan) => (
-            <div key={artisan.id} className="artisan-card" style={{ cursor: 'pointer' }} onClick={() => handleCardClick(artisan.id)}>
+            <div key={artisan.id} className="artisan-card" onClick={() => navigate(`/artisan/${artisan.id}`)} style={{ cursor: 'pointer' }}>
               <h3>{artisan.nom}</h3>
               <p><strong>Spécialité :</strong> {artisan.specialite?.nom || 'Non renseignée'}</p>
               <p><strong>Localisation :</strong> {artisan.ville || 'Non précisée'}</p>

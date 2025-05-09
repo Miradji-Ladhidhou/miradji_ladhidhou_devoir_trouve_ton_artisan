@@ -1,6 +1,6 @@
 // Artisan model definition
 module.exports = (sequelize, DataTypes) => {
-  const Artisan = sequelize.define('Artisan', {
+  const artisan = sequelize.define('Artisan', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         model: 'specialites',
         key: 'id',
       },
-      allowNull: false,
+   
     },
     note: {
       type: DataTypes.DECIMAL(2, 1),
@@ -47,15 +47,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'artisans',
     timestamps: false 
+
   });
 
   // Association avec Specialite
-  Artisan.associate = (models) => {
-    Artisan.belongsTo(models.Specialite, {
+  artisan.associate = (models) => {
+    artisan.belongsTo(models.Specialite, {
       foreignKey: 'specialite_id',
       as: 'specialite',
     });
   };
 
-  return Artisan;
+  return artisan;
 };
