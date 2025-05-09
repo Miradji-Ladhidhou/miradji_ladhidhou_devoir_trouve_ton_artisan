@@ -40,7 +40,7 @@ function ListeArtisans() {
   useEffect(() => {
     const fetchArtisans = async () => {
       try {
-        let url = 'https://api-mon-artisan.onrender.com/api/artisans';
+        let url = (`${process.env.REACT_APP_API_URL}/api/artisans`);
 
         // Modifie l'URL en fonction des paramètres de recherche
         if (nom) {
@@ -79,7 +79,7 @@ function ListeArtisans() {
   };
 
   // Affichage si les données sont en train de se charger
-  if (loading) return <p className="loading">Chargement...</p>;
+  if (loading) return <p style={{ color: 'red', fontSize: '24px' }}>Chargement...</p>;
 
   return (
     <div className="artisans-container">

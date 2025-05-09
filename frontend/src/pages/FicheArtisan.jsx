@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import logo from '../image/Logo.png';
 import { Helmet } from 'react-helmet-async';
 
 // Composant pour afficher la fiche d'un artisan
@@ -14,7 +13,7 @@ function FicheArtisan() {
   useEffect(() => {
     const fetchArtisan = async () => {
       try {
-        const response = await axios.get(`https://api-mon-artisan.onrender.com/api/artisans/${id}`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/artisans/${id}`);
         setArtisan(response.data);
       } catch (err) {
         console.error('Erreur lors de la récupération de l’artisan :', err);
@@ -36,7 +35,8 @@ function FicheArtisan() {
   };
   
   // Affiche un message de chargement pendant la requête
-  if (!artisan) return <p>Chargement...</p>;
+  console.log('artisan', artisan);
+  if (!artisan) return <p style={{ color: 'red', fontSize: '24px' }}>Chargement...</p>;
 
   // Affichage des informations de l'artisan et formulaire de contact
   return (
@@ -47,7 +47,7 @@ function FicheArtisan() {
         <meta name="description" content="Découvrez le profil détaillé de nos artisans" />
       </Helmet>
       <h2>{artisan.nom}</h2>
-      <img src={logo} alt={artisan.nom} className="artisan-photo" />
+      <img src="/Logo.png" alt={artisan.nom} className="artisan-photo" />
       <p className="stars">{renderStars(artisan.note || 0)}</p>
       <p><strong>Spécialité :</strong> {artisan.specialite?.nom}</p>
       <p><strong>Localisation :</strong> {artisan.ville}</p>
